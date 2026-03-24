@@ -1,7 +1,7 @@
 pipeline {
  agent {
  node {
- label 'maven'
+def mvnHome = tool name: 'Maven-3.9', type: 'maven'
  }
  }
 
@@ -14,7 +14,7 @@ environment {
  stages {
  stage('Tests') {
  steps {
- sh './mvnw clean test'
+ sh '${mvnHome}/bin/mvn clean install'
  }
  }
  stage('Package') {
