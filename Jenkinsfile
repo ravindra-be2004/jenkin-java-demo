@@ -35,7 +35,7 @@ environment {
  -Dextensions="kubernetes,container-image-jib"
  '''
  sh '''
- ./mvnw package -DskipTests \
+  mvn package -DskipTests \
  -Dquarkus.jib.base-jvm-image=quay.io/redhattraining/do400-java-alpine-openjdk11-jre:latest \
  -Dquarkus.container-image.build=true \
  -Dquarkus.container-image.registry=quay.io \
