@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.redhat.shopping.integration.whitebox.ShoppingCartTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.975 s - in com.redhat.shopping.integration.whitebox.ShoppingCartTest

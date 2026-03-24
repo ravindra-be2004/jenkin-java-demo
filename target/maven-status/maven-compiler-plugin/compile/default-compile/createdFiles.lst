@@ -1,0 +1,10 @@
+com/redhat/shopping/catalog/Catalog.class
+com/redhat/shopping/catalog/ProductNotFoundInCatalogException.class
+com/redhat/shopping/cart/CartItem.class
+com/redhat/shopping/ShoppingCartResource.class
+com/redhat/shopping/catalog/CatalogService.class
+com/redhat/shopping/cart/CartView.class
+com/redhat/shopping/cart/AddToCartCommand.class
+com/redhat/shopping/cart/CartService.class
+com/redhat/shopping/catalog/Product.class
+com/redhat/shopping/cart/ProductNotInCartException.class
