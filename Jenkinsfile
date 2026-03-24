@@ -20,7 +20,7 @@ environment {
  stage('Package') {
  steps {
  sh '''
- ./mvnw package -DskipTests \
+ mvn package -DskipTests \
  -Dquarkus.package.type=uber-jar
  '''
  archiveArtifacts 'target/*.jar'
@@ -31,7 +31,7 @@ environment {
  environment { QUAY = credentials('QUAY_USER') }
  steps {
  sh '''
- ./mvnw quarkus:add-extension \
+ mvn quarkus:add-extension \
  -Dextensions="kubernetes,container-image-jib"
  '''
  sh '''
