@@ -56,7 +56,7 @@ stage('Deploy - Stage') {
  }
  steps {
  sh """
- cat <<EOF | oc apply -f -
+ cat << EOF | oc apply -f -
  apiVersion: apps/v1
  kind: Deployment
  metadata:
