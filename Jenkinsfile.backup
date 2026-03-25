@@ -7,8 +7,8 @@ pipeline {
 
 environment {
  RHT_OCP4_DEV_USER = 'ngqxba'
- DEPLOYMENT_STAGE = 'stage'
- DEPLOYMENT_PRODUCTION = 'production'
+ DEPLOYMENT_STAGE = 'shopping-cart-stage'
+ DEPLOYMENT_PRODUCTION = 'shopping-cart-production'
  }
 
  stages {
@@ -51,38 +51,22 @@ environment {
 
 stage('Deploy - Stage') {
  environment {
- APP_NAMESPACE = "${RHT_OCP4_DEV_USER}-stage"
+ APP_NAMESPACE = "${RHT_OCP4_DEV_USER}-shopping-cart-stage"
  QUAY = credentials('QUAY_USER')
  }
  steps {
  sh """
- cat <<EOF | oc apply -f -
- apiVersion: apps/v1
- kind: Deployment
- metadata:
-   name: ${DEPLOYMENT_STAGE}
-   namespace: ${APP_NAMESPACE}
- spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ${DEPLOYMENT_STAGE}
-  template:
-    metadata:
-      labels:
-        app: ${DEPLOYMENT_STAGE}
-    spec:
-      containers:
-      - name: ${DEPLOYMENT_STAGE}
-        image: quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER}
- EOF
+ oc set image \
+ deployment ${DEPLOYMENT_STAGE} \
+ shopping-cart-stage=quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER} \
+ -n ${APP_NAMESPACE} --record
  """
  }
 }
 
 stage('Deploy - Production') {
  environment {
- APP_NAMESPACE = "${RHT_OCP4_DEV_USER}-production"
+ APP_NAMESPACE = "${RHT_OCP4_DEV_USER}-shopping-cart-production"
  QUAY = credentials('QUAY_USER')
  }
  input { message 'Deploy to production?' }

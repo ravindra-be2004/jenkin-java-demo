@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web3
+  name: web3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web3
+  template:
+    metadata:
+      labels:
+        app: web3
+    spec:
+      containers:
+      - image: quay.io/ravindra_be2004/mydemo:v1
+              #      - image: registry.access.redhat.com/ubi9/httpd-24
+        imagePullPolicy: IfNotPresent
+        name: mydemo
+        resources:
+          requests:
+            cpu: 20m
+            memory: 100Mi
