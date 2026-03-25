@@ -56,26 +56,26 @@ stage('Deploy - Stage') {
  }
  steps {
  sh """
- cat <<EOF | oc apply -f -
- apiVersion: apps/v1
- kind: Deployment
- metadata:
-   name: ${DEPLOYMENT_STAGE}
-   namespace: ${APP_NAMESPACE}
- spec:
-   replicas: 1
-   selector:
-     matchLabels:
-       app: ${DEPLOYMENT_STAGE}
- template:
-   metadata:
-     labels:
-       app: ${DEPLOYMENT_STAGE}
-   spec:
-     containers:
-     - name: ${DEPLOYMENT_STAGE}
-       image: quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER}
- EOF
+cat <<EOF | oc apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${DEPLOYMENT_STAGE}
+  namespace: ${APP_NAMESPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${DEPLOYMENT_STAGE}
+template:
+  metadata:
+    labels:
+      app: ${DEPLOYMENT_STAGE}
+  spec:
+    containers:
+    - name: ${DEPLOYMENT_STAGE}
+      image: quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER}
+EOF
  """
  }
 }
