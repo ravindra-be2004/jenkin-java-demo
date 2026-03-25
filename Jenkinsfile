@@ -88,9 +88,26 @@ stage('Deploy - Production') {
  input { message 'Deploy to production?' }
  steps {
  sh """
- oc set image \
- deployment ${DEPLOYMENT_PRODUCTION} \
- shopping-cart-production=quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER} -n ${APP_NAMESPACE} --record
+cat <<EOF | oc apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${DEPLOYMENT_PRODUCTION}
+  namespace: ${APP_NAMESPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${DEPLOYMENT_PRODUCTION}
+  template:
+    metadata:
+      labels:
+        app: ${DEPLOYMENT_PRODUCTION}
+    spec:
+      containers:
+      - name: ${DEPLOYMENT_PRODUCTION}
+        image: quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER}
+EOF
 """
 }
 }
