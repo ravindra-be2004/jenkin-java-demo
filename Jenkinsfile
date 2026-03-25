@@ -67,14 +67,14 @@ spec:
   selector:
     matchLabels:
       app: ${DEPLOYMENT_STAGE}
-template:
-  metadata:
-    labels:
-      app: ${DEPLOYMENT_STAGE}
-  spec:
-    containers:
-    - name: ${DEPLOYMENT_STAGE}
-      image: quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER}
+  template:
+    metadata:
+      labels:
+        app: ${DEPLOYMENT_STAGE}
+    spec:
+      containers:
+      - name: ${DEPLOYMENT_STAGE}
+        image: quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER}
 EOF
  """
  }
